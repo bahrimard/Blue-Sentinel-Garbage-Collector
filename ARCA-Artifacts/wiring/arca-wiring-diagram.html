@@ -1,0 +1,409 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>ARCA Wiring Review</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F5F9F7; --surface:#FFFFFF; --surface-2:#EAF1EE; --ink:#122421; --ink-soft:#526661; --line:#D7E4DF;
+  --accent:#0E7C74; --accent-soft:#DBEFEA;
+  --warn:#A85A1E; --warn-soft:#FBE7D2; --on-warn:#FFFFFF;
+  --crit:#B3261E; --crit-soft:#F9DEDC;
+  --ok:#2E7D4F; --ok-soft:#DDF1E4;
+  --wire-power:#C6402F; --wire-reg:#D9832A; --wire-gnd:#26332F; --wire-sig:#B58A12; --wire-echo:#2E8A54; --wire-pwm:#3768AC;
+  --sans:'IBM Plex Sans',system-ui,-apple-system,sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#0D1613; --surface:#131F1B; --surface-2:#182521; --ink:#E8F1EE; --ink-soft:#9FB6AF; --line:#26372F;
+    --accent:#57D6C8; --accent-soft:#173430;
+    --warn:#E8A15C; --warn-soft:#2E2116; --on-warn:#1A0F05;
+    --crit:#F2877E; --crit-soft:#3A1A18;
+    --ok:#6FCB8E; --ok-soft:#15291D;
+    --wire-power:#EE7B6A; --wire-reg:#F0A75B; --wire-gnd:#9FB3AC; --wire-sig:#E3C158; --wire-echo:#6FCB8E; --wire-pwm:#7FA9E0;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#0D1613; --surface:#131F1B; --surface-2:#182521; --ink:#E8F1EE; --ink-soft:#9FB6AF; --line:#26372F;
+  --accent:#57D6C8; --accent-soft:#173430;
+  --warn:#E8A15C; --warn-soft:#2E2116; --on-warn:#1A0F05;
+  --crit:#F2877E; --crit-soft:#3A1A18;
+  --ok:#6FCB8E; --ok-soft:#15291D;
+  --wire-power:#EE7B6A; --wire-reg:#F0A75B; --wire-gnd:#9FB3AC; --wire-sig:#E3C158; --wire-echo:#6FCB8E; --wire-pwm:#7FA9E0;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);padding-inline:20px}
+.wrap{max-width:1040px;margin:0 auto;padding-block:28px 64px}
+h1,h2,h3{font-weight:700;line-height:1.15;text-wrap:balance;margin:0}
+h1{font-size:clamp(1.5rem,4vw,2.05rem)}
+h2{font-size:1.3rem;margin-bottom:6px}
+h3{font-size:.98rem}
+p{line-height:1.6;margin:0 0 12px;max-width:72ch}
+.soft{color:var(--ink-soft)}
+.eyebrow{font-family:var(--mono);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin-bottom:8px}
+section{margin-top:44px}
+.nav{display:flex;gap:6px;flex-wrap:wrap;margin-top:16px}
+.pill{font-family:var(--mono);font-size:.72rem;text-transform:uppercase;letter-spacing:.03em;color:var(--ink-soft);background:var(--surface-2);border:1px solid var(--line);border-radius:999px;padding:6px 12px;text-decoration:none}
+.pill:hover,.pill:focus-visible{color:var(--ink);outline:2px solid var(--accent);outline-offset:1px}
+
+.verdict{margin-top:20px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px 22px}
+.verdict p{margin:0}
+.callout{display:flex;gap:12px;align-items:flex-start;background:var(--warn-soft);border:1px solid var(--warn);border-radius:12px;padding:14px 18px;margin-top:14px}
+.callout .mark{font-family:var(--mono);font-weight:600;font-size:.72rem;color:var(--warn);border:1px solid var(--warn);border-radius:999px;padding:2px 9px;flex:0 0 auto;text-transform:uppercase}
+.callout p{margin:0;font-size:.92rem}
+
+.figwrap{margin-top:14px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px;overflow-x:auto}
+.figwrap svg{display:block;width:100%;min-width:900px;height:auto;color:var(--ink)}
+figcaption{font-size:.82rem;color:var(--ink-soft);margin-top:10px;line-height:1.55;max-width:90ch}
+.brd{fill:var(--surface-2);stroke:var(--ink-soft);stroke-width:1.2;stroke-dasharray:6 4}
+.box{fill:var(--surface);stroke:var(--ink);stroke-width:1.4}
+.lbl{fill:var(--ink);font-family:var(--mono);font-size:12px}
+.lbl-b{fill:var(--ink);font-family:var(--sans);font-size:14px;font-weight:700}
+.sm{fill:var(--ink-soft);font-family:var(--mono);font-size:10px}
+.pin{fill:var(--ink-soft);font-family:var(--mono);font-size:9.5px}
+.warn-t{fill:var(--warn);font-family:var(--mono);font-size:10.5px;font-weight:600}
+.brd-t{fill:var(--ink-soft);font-family:var(--mono);font-size:10px;letter-spacing:.06em}
+.w-p{stroke:var(--wire-power);stroke-width:3;fill:none}
+.w-5{stroke:var(--wire-reg);stroke-width:2.5;fill:none}
+.w-c{stroke:var(--wire-reg);stroke-width:2.5;fill:none;stroke-dasharray:7 4}
+.w-g{stroke:var(--wire-gnd);stroke-width:2.5;fill:none}
+.w-s{stroke:var(--wire-sig);stroke-width:1.8;fill:none}
+.w-e{stroke:var(--wire-echo);stroke-width:1.8;fill:none}
+.w-m{stroke:var(--wire-pwm);stroke-width:1.8;fill:none}
+.st{stroke:var(--ink);stroke-width:1.4;fill:none}
+.dot{fill:var(--ink)}
+.legend{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.chip{display:flex;align-items:center;gap:7px;background:var(--surface-2);border:1px solid var(--line);border-radius:999px;padding:4px 11px;font-size:.78rem}
+.sw{width:18px;height:4px;border-radius:2px}
+
+.tblwrap{overflow-x:auto;margin-top:10px;background:var(--surface);border:1px solid var(--line);border-radius:12px}
+table{width:100%;border-collapse:collapse;font-size:.86rem;font-variant-numeric:tabular-nums}
+th,td{text-align:left;padding:8px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:.7rem;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-soft);font-weight:600;background:var(--surface-2)}
+tr:last-child td{border-bottom:none}
+td.mono{font-family:var(--mono);white-space:nowrap}
+tr.grp td{background:var(--surface-2);font-family:var(--mono);font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;color:var(--accent);font-weight:600}
+.w{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:-1px}
+
+.finds{display:grid;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-top:10px}
+.f{display:grid;grid-template-columns:34px 1fr;gap:12px;background:var(--surface);padding:14px 16px}
+.num{width:24px;height:24px;border-radius:50%;background:var(--crit);color:var(--surface);font:600 .74rem var(--mono);display:grid;place-items:center;margin-top:1px}
+.f h3{margin-bottom:4px}
+.f p{margin:0;font-size:.9rem;color:var(--ink-soft)}
+.f p b{color:var(--ink);font-weight:600}
+pre{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px;overflow-x:auto;font-family:var(--mono);font-size:.8rem;line-height:1.55;margin-top:10px}
+code{font-family:var(--mono);font-size:.85em;background:var(--surface-2);border:1px solid var(--line);border-radius:5px;padding:0 5px}
+pre code{background:none;border:none;padding:0;font-size:inherit}
+ul.check{list-style:none;padding:0;margin:10px 0 0;display:grid;gap:8px}
+ul.check li{display:grid;grid-template-columns:18px 1fr;gap:10px;font-size:.9rem;line-height:1.5}
+ul.check li::before{content:"";width:14px;height:14px;border:1.5px solid var(--accent);border-radius:3px;margin-top:3px}
+.later{font-size:.88rem;color:var(--ink-soft)}
+.later li{margin-bottom:4px}
+footer{margin-top:48px;padding-top:16px;border-top:1px solid var(--line);font-size:.82rem;color:var(--ink-soft)}
+footer a{color:var(--accent)}
+</style>
+
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">ARCA · versi lomba · wiring final</div>
+  <h1>Wiring diagram ARCA — siap rakit</h1>
+  <p class="soft" style="margin-top:8px">Hanya pakai part yang sudah ada di plan: 2S 18650, L7805 + 1µF, L298N, ESP32 DevKit V1, 4× HC‑SR04 + divider 470Ω/1kΩ, BC337 + 1kΩ + buzzer, motor conveyor (langsung dari titik tengah baterai, tanpa buck). Tidak ada komponen tambahan — pengamannya dari setting jumper, cara wiring, dan firmware.</p>
+  <nav class="nav">
+    <a class="pill" href="#diagram">Diagram</a>
+    <a class="pill" href="#koneksi">Tabel koneksi</a>
+    <a class="pill" href="#wajib">Wajib malam ini</a>
+    <a class="pill" href="#firmware">Firmware</a>
+    <a class="pill" href="#uji">Urutan uji</a>
+  </nav>
+
+  <div class="verdict">
+    <p><b>Aman &amp; works?</b> Ya, dengan 6 aturan di bagian “Wajib malam ini” — semuanya gratis, tidak butuh beli part. Rangkaian sinyal (divider ECHO 3.40 V, pemilihan GPIO, driver buzzer) sudah benar. Risiko yang tersisa karena tanpa sekring/BMS ditutup dengan kebiasaan: kabel power terisolasi rapi, baterai dicabut saat tidak dipakai, dan tegangan dicek pakai multimeter tiap selesai sesi.</p>
+  </div>
+  <div class="callout"><span class="mark">Ingat</span><p><b>Motor kanan lebih kencang dari kiri = kapal belok KIRI</b> (differential thrust). Cek arah tiap motor sebelum turun ke air — kalau terbalik, tukar dua kabel motor di terminal OUT L298N, jangan ubah kode.</p></div>
+
+  <section id="diagram">
+    <h2>Wiring diagram sistem</h2>
+    <div class="figwrap">
+      <svg viewBox="0 0 1200 800" role="img" aria-label="Diagram wiring ARCA versi lomba: baterai 2S masuk ke VBAT bus di Board A. Dari bus ke L298N, ESP32 VIN, dan L7805. Motor conveyor diambil dari titik tengah pack (satu sel, 3 sampai 4,2 volt) ke ground, tanpa buck converter. L7805 memberi 5V ke board sensor dan buzzer. ESP32 mengendalikan L298N lewat GPIO 13,14,16,17 dan PWM 25,26, membaca empat HC-SR04 lewat TRIG 4,5,18,19 dan ECHO 34, 35, 32, 33, dan menyalakan buzzer lewat GPIO27. Semua ground kembali ke satu titik star di Board A.">
+        <defs>
+          <g id="gnd"><line x1="-8" y1="0" x2="8" y2="0" class="st"/><line x1="-5" y1="4" x2="5" y2="4" class="st"/><line x1="-2" y1="8" x2="2" y2="8" class="st"/></g>
+        </defs>
+
+        <!-- BATTERY -->
+        <text x="75" y="190" text-anchor="middle" class="lbl-b">BATERAI 2S</text>
+        <rect x="20" y="200" width="110" height="170" rx="6" class="box"/>
+        <rect x="36" y="212" width="58" height="54" rx="4" style="fill:var(--surface-2);stroke:var(--ink-soft);stroke-width:1.2"/>
+        <text x="65" y="236" text-anchor="middle" class="lbl">SEL 2</text>
+        <text x="65" y="252" text-anchor="middle" class="sm">18650</text>
+        <rect x="36" y="296" width="58" height="54" rx="4" style="fill:var(--surface-2);stroke:var(--ink-soft);stroke-width:1.2"/>
+        <text x="65" y="320" text-anchor="middle" class="lbl">SEL 1</text>
+        <text x="65" y="336" text-anchor="middle" class="sm">18650</text>
+        <line x1="65" y1="266" x2="65" y2="296" class="st"/>
+        <text x="100" y="226" class="pin">+</text>
+        <line x1="94" y1="222" x2="440" y2="222" class="w-p"/>
+        <text x="150" y="212" class="sm">konektor baterai = saklar ON/OFF</text>
+        <text x="150" y="240" class="sm">kabel tebal · 7.4 V nom · 8.4 V penuh</text>
+        <polyline points="65,350 65,392 412,392" class="w-g"/>
+        <text x="75" y="386" class="sm">−</text>
+
+        <!-- BOARD A -->
+        <rect x="400" y="150" width="230" height="480" rx="10" class="brd"/>
+        <text x="412" y="168" class="brd-t">BOARD A · PWR</text>
+        <line x1="440" y1="190" x2="440" y2="610" class="w-p"/>
+        <circle cx="440" cy="222" r="3.5" class="dot"/>
+        <text x="448" y="248" class="sm">VBAT bus</text>
+
+        <circle cx="440" cy="200" r="3.5" class="dot"/>
+        <line x1="440" y1="200" x2="700" y2="200" class="w-p"/>
+        <text x="452" y="193" class="sm">J3 → L298N 12V</text>
+
+        <circle cx="440" cy="400" r="3.5" class="dot"/>
+        <line x1="440" y1="400" x2="700" y2="400" class="w-p"/>
+        <text x="452" y="393" class="sm">J2 → ESP32 VIN</text>
+
+        <circle cx="440" cy="462" r="3.5" class="dot"/>
+        <line x1="440" y1="462" x2="470" y2="462" class="w-p"/>
+        <rect x="470" y="440" width="80" height="44" rx="4" class="box"/>
+        <text x="510" y="466" text-anchor="middle" class="lbl">L7805</text>
+        <line x1="510" y1="484" x2="510" y2="498" class="st"/>
+        <use href="#gnd" x="510" y="498"/>
+        <text x="510" y="526" text-anchor="middle" class="sm">1µF in · 1µF out</text>
+        <polyline points="550,462 600,462 600,700 660,700" class="w-5"/>
+        <text x="606" y="560" class="sm" style="fill:var(--wire-reg)">5V</text>
+
+        <!-- conveyor dari titik tengah pack (1 sel, 3.0-4.2 V), tanpa buck -->
+        <circle cx="65" cy="281" r="3.5" class="dot"/>
+        <polyline points="65,281 10,281 10,520 124,520" class="w-c"/>
+        <circle cx="150" cy="520" r="26" class="box"/>
+        <text x="150" y="525" text-anchor="middle" class="lbl-b">M</text>
+        <text x="150" y="566" text-anchor="middle" class="sm">conveyor</text>
+        <text x="150" y="580" text-anchor="middle" class="sm">selalu ON</text>
+        <polyline points="176,520 230,520 230,392" class="w-g"/>
+        <circle cx="230" cy="392" r="3.5" class="dot"/>
+        <text x="18" y="440" class="sm" style="fill:var(--wire-reg)">+ titik tengah</text>
+        <text x="18" y="453" class="sm" style="fill:var(--wire-reg)">(+ sel 1)</text>
+        <text x="18" y="466" class="sm" style="fill:var(--wire-reg)">3.0–4.2 V</text>
+        <text x="236" y="470" class="sm">− ke GND</text>
+
+        <line x1="412" y1="392" x2="412" y2="600" class="w-g"/>
+        <circle cx="412" cy="600" r="7" style="fill:var(--wire-gnd)"/>
+        <text x="396" y="590" text-anchor="end" class="lbl">STAR GND</text>
+        <text x="396" y="606" text-anchor="end" class="sm">semua GND ke sini,</text>
+        <text x="396" y="619" text-anchor="end" class="sm">1 kabel per modul</text>
+
+        <!-- L298N -->
+        <rect x="700" y="60" width="200" height="200" rx="6" class="box"/>
+        <text x="716" y="88" class="lbl-b">L298N</text>
+        <text x="716" y="110" class="warn-t">jumper ENA/ENB: CABUT</text>
+        <text x="716" y="128" class="sm">jumper 12V‑EN: pasang</text>
+        <text x="716" y="146" class="sm">pin 5V: kosongkan</text>
+        <text x="716" y="176" class="sm">GND → ★</text>
+        <text x="708" y="214" class="pin">12V</text>
+        <text x="892" y="104" text-anchor="end" class="pin">OUT1/2</text>
+        <text x="892" y="224" text-anchor="end" class="pin">OUT3/4</text>
+        <g class="pin">
+          <text x="720" y="252" text-anchor="middle">IN1</text><text x="745" y="252" text-anchor="middle">IN2</text>
+          <text x="770" y="252" text-anchor="middle">IN3</text><text x="795" y="252" text-anchor="middle">IN4</text>
+          <text x="840" y="252" text-anchor="middle">ENA</text><text x="865" y="252" text-anchor="middle">ENB</text>
+        </g>
+        <line x1="900" y1="94" x2="968" y2="94" class="st"/><line x1="900" y1="106" x2="968" y2="106" class="st"/>
+        <line x1="900" y1="214" x2="968" y2="214" class="st"/><line x1="900" y1="226" x2="968" y2="226" class="st"/>
+        <circle cx="1000" cy="100" r="32" class="box"/>
+        <text x="1000" y="105" text-anchor="middle" class="lbl-b">M</text>
+        <text x="1000" y="150" text-anchor="middle" class="sm">baling kiri</text>
+        <circle cx="1000" cy="220" r="32" class="box"/>
+        <text x="1000" y="225" text-anchor="middle" class="lbl-b">M</text>
+        <text x="1000" y="270" text-anchor="middle" class="sm">baling kanan</text>
+
+        <line x1="720" y1="260" x2="720" y2="330" class="w-s"/>
+        <line x1="745" y1="260" x2="745" y2="330" class="w-s"/>
+        <line x1="770" y1="260" x2="770" y2="330" class="w-s"/>
+        <line x1="795" y1="260" x2="795" y2="330" class="w-s"/>
+        <line x1="840" y1="260" x2="840" y2="330" class="w-m"/>
+        <line x1="865" y1="260" x2="865" y2="330" class="w-m"/>
+
+        <!-- ESP32 -->
+        <rect x="690" y="322" width="220" height="216" rx="10" class="brd"/>
+        <rect x="700" y="330" width="200" height="200" rx="6" class="box"/>
+        <g class="pin">
+          <text x="720" y="346" text-anchor="middle">13</text><text x="745" y="346" text-anchor="middle">14</text>
+          <text x="770" y="346" text-anchor="middle">16</text><text x="795" y="346" text-anchor="middle">17</text>
+          <text x="840" y="346" text-anchor="middle">25</text><text x="865" y="346" text-anchor="middle">26</text>
+        </g>
+        <text x="708" y="404" class="pin">VIN</text>
+        <text x="800" y="430" text-anchor="middle" class="lbl-b">ESP32 DevKit V1</text>
+        <text x="800" y="448" text-anchor="middle" class="brd-t">BOARD B · MCU</text>
+        <text x="800" y="466" text-anchor="middle" class="sm">GND → ★</text>
+        <text x="892" y="484" text-anchor="end" class="pin">27</text>
+        <g class="pin">
+          <text x="715" y="522" text-anchor="middle">4</text><text x="739" y="522" text-anchor="middle">5</text>
+          <text x="763" y="522" text-anchor="middle">18</text><text x="787" y="522" text-anchor="middle">19</text>
+          <text x="811" y="522" text-anchor="middle">34</text><text x="835" y="522" text-anchor="middle">35</text>
+          <text x="859" y="522" text-anchor="middle">32</text><text x="883" y="522" text-anchor="middle">33</text>
+        </g>
+        <line x1="715" y1="530" x2="715" y2="590" class="w-s"/>
+        <line x1="739" y1="530" x2="739" y2="590" class="w-s"/>
+        <line x1="763" y1="530" x2="763" y2="590" class="w-s"/>
+        <line x1="787" y1="530" x2="787" y2="590" class="w-s"/>
+        <line x1="811" y1="530" x2="811" y2="590" class="w-e"/>
+        <line x1="835" y1="530" x2="835" y2="590" class="w-e"/>
+        <line x1="859" y1="530" x2="859" y2="590" class="w-e"/>
+        <line x1="883" y1="530" x2="883" y2="590" class="w-e"/>
+        <polyline points="900,480 1010,480 1010,690 1025,690" class="w-s"/>
+
+        <!-- BOARD C -->
+        <rect x="660" y="590" width="300" height="190" rx="10" class="brd"/>
+        <text x="751" y="608" text-anchor="middle" class="pin">TRIG</text>
+        <text x="847" y="608" text-anchor="middle" class="pin">ECHO</text>
+        <rect x="675" y="622" width="60" height="42" rx="4" class="box"/>
+        <rect x="745" y="622" width="60" height="42" rx="4" class="box"/>
+        <rect x="815" y="622" width="60" height="42" rx="4" class="box"/>
+        <rect x="885" y="622" width="60" height="42" rx="4" class="box"/>
+        <g text-anchor="middle">
+          <text x="705" y="640" class="lbl">TB1</text><text x="705" y="655" class="sm">Bin‑L</text>
+          <text x="775" y="640" class="lbl">TB2</text><text x="775" y="655" class="sm">Bin‑R</text>
+          <text x="845" y="640" class="lbl">TB3</text><text x="845" y="655" class="sm">Depan‑L</text>
+          <text x="915" y="640" class="lbl">TB4</text><text x="915" y="655" class="sm">Depan‑R</text>
+        </g>
+        <text x="810" y="688" text-anchor="middle" class="sm">4× HC‑SR04 · ECHO ÷ 470Ω/1kΩ → 3.40 V</text>
+        <text x="810" y="704" text-anchor="middle" class="sm">VCC ke 5V rail · GND ke rail GND</text>
+        <line x1="660" y1="700" x2="672" y2="700" class="w-5"/>
+        <polyline points="672,700 672,745 1160,745" class="w-5"/>
+        <text x="680" y="740" class="sm" style="fill:var(--wire-reg)">5V rail</text>
+        <text x="670" y="770" class="brd-t">BOARD C · SENSOR</text>
+        <text x="950" y="770" text-anchor="end" class="sm">GND → ★</text>
+
+        <!-- BOARD D -->
+        <rect x="990" y="590" width="190" height="190" rx="10" class="brd"/>
+        <text x="1000" y="770" class="brd-t">BOARD D · BUZZER</text>
+        <polyline points="1010,590 1010,690 1025,690" class="w-s"/>
+        <rect x="1025" y="684" width="30" height="12" rx="2" class="box"/>
+        <text x="1040" y="678" text-anchor="middle" class="sm">1k</text>
+        <line x1="1055" y1="690" x2="1072" y2="690" class="st"/>
+        <circle cx="1090" cy="690" r="18" class="box"/>
+        <text x="1090" y="694" text-anchor="middle" class="pin">Q1</text>
+        <text x="1114" y="694" class="pin">BC337</text>
+        <line x1="1090" y1="708" x2="1090" y2="718" class="st"/>
+        <use href="#gnd" x="1090" y="718"/>
+        <text x="1100" y="724" class="pin">E</text>
+        <line x1="1090" y1="672" x2="1090" y2="658" class="st"/>
+        <text x="1096" y="668" class="pin">C</text>
+        <circle cx="1090" cy="645" r="13" class="box"/>
+        <text x="1090" y="649" text-anchor="middle" class="pin">BZ</text>
+        <polyline points="1090,632 1090,618 1160,618 1160,745" class="w-5"/>
+        <text x="1098" y="612" class="pin">+</text>
+        <text x="1016" y="610" class="pin">GPIO27</text>
+      </svg>
+    </div>
+    <div class="legend">
+      <span class="chip"><span class="sw" style="background:var(--wire-power)"></span>VBAT 7–8.4 V</span>
+      <span class="chip"><span class="sw" style="background:var(--wire-reg)"></span>5 V (L7805)</span>
+      <span class="chip"><span class="sw" style="background:repeating-linear-gradient(90deg,var(--wire-reg) 0 7px,transparent 7px 11px)"></span>Tap 1 sel → conveyor</span>
+      <span class="chip"><span class="sw" style="background:var(--wire-gnd)"></span>GND</span>
+      <span class="chip"><span class="sw" style="background:var(--wire-sig)"></span>Sinyal digital</span>
+      <span class="chip"><span class="sw" style="background:var(--wire-pwm)"></span>PWM ENA/ENB</span>
+      <span class="chip"><span class="sw" style="background:var(--wire-echo)"></span>ECHO (lewat divider)</span>
+    </div>
+    <figcaption>ECHO sensor depan dipindah ke <b>D32</b> (depan-kiri) dan <b>D33</b> (depan-kanan) karena GPIO36/39 di board tercetak VP/VN dan rawan glitch; pin lain sama dengan wiring plan final.</figcaption>
+  </section>
+
+  <section id="koneksi">
+    <h2>Tabel koneksi (pin ke pin)</h2>
+    <p class="soft">Centang satu per satu saat menyolder/mengecek dengan multimeter mode continuity.</p>
+    <div class="tblwrap">
+      <table>
+        <tr><th>Dari</th><th>Ke</th><th>Catatan</th></tr>
+        <tr class="grp"><td colspan="3">Power</td></tr>
+        <tr><td><span class="w" style="background:var(--wire-power)"></span>Baterai +</td><td>Board A · VBAT bus</td><td>Kabel paling tebal yang ada. Konektor ini jadi saklar.</td></tr>
+        <tr><td><span class="w" style="background:var(--wire-gnd)"></span>Baterai −</td><td>Board A · STAR GND</td><td>—</td></tr>
+        <tr><td>VBAT bus</td><td>L298N terminal <b>12V</b></td><td>Pakai terminal screw bawaan L298N, bukan dupont</td></tr>
+        <tr><td>STAR GND</td><td>L298N terminal <b>GND</b></td><td>Satu‑satunya GND L298N</td></tr>
+        <tr><td>VBAT bus / STAR GND</td><td>ESP32 <b>VIN</b> / <b>GND</b></td><td>Jangan ke pin 3V3</td></tr>
+        <tr><td>VBAT bus</td><td>L7805 IN (kaki 1) + 1µF ke GND</td><td>Kaki 2 = GND → star</td></tr>
+        <tr><td>L7805 OUT (kaki 3) + 1µF ke GND</td><td>5V rail Board C → Board D</td><td>Ukur 4.9–5.1 V sebelum sensor dipasang</td></tr>
+        <tr><td>Titik tengah pack (sambungan + sel 1 / − sel 2)</td><td>Motor conveyor (+)</td><td>Solder ke lempeng penghubung antar sel di holder. Isolasi rapat — kabel ini tanpa pengaman. Ukur dulu: 3.0–4.2 V ke GND</td></tr>
+        <tr><td>Motor conveyor (−)</td><td>STAR GND / − baterai</td><td>Balik 2 kabel motor kalau arah putar salah</td></tr>
+        <tr class="grp"><td colspan="3">Motor (ESP32 → L298N)</td></tr>
+        <tr><td class="mono">GPIO13 / GPIO14</td><td>IN1 / IN2</td><td>Arah motor kiri</td></tr>
+        <tr><td class="mono">GPIO16 / GPIO17</td><td>IN3 / IN4</td><td>Arah motor kanan</td></tr>
+        <tr><td class="mono">GPIO25 / GPIO26</td><td>ENA / ENB</td><td>Ke pin sinyal header ENA/ENB setelah jumper dicabut — bukan pin 5V‑nya (pin 5V ada di sisi yang dekat regulator; cek dengan multimeter)</td></tr>
+        <tr><td>OUT1 / OUT2</td><td>Motor kiri</td><td>—</td></tr>
+        <tr><td>OUT3 / OUT4</td><td>Motor kanan</td><td>—</td></tr>
+        <tr class="grp"><td colspan="3">Sensor (Board C)</td></tr>
+        <tr><td class="mono">GPIO4 · 5 · 18 · 19</td><td>TRIG US1 · US2 · US3 · US4</td><td>Langsung, tanpa resistor</td></tr>
+        <tr><td>ECHO tiap sensor</td><td>470Ω → titik tengah → 1kΩ → GND</td><td>470Ω di sisi sensor, 1kΩ di sisi GND — kalau terbalik ESP32 dapat 1.6 V saja dan sensor tidak terbaca</td></tr>
+        <tr><td>Titik tengah divider</td><td class="mono">GPIO34 · 35 · 32 · 33</td><td>US1 · US2 · US3 · US4</td></tr>
+        <tr><td>VCC / GND tiap sensor</td><td>5V rail / GND rail Board C</td><td>Lewat TB1–TB4</td></tr>
+        <tr class="grp"><td colspan="3">Buzzer (Board D)</td></tr>
+        <tr><td class="mono">GPIO27</td><td>1kΩ → basis BC337</td><td>—</td></tr>
+        <tr><td>Emitor BC337</td><td>GND</td><td>Cek pinout di datasheet/marking — umumnya dari sisi datar: C · B · E</td></tr>
+        <tr><td>Kolektor BC337</td><td>Buzzer (−)</td><td>—</td></tr>
+        <tr><td>Buzzer (+)</td><td>5V rail</td><td>—</td></tr>
+        <tr class="grp"><td colspan="3">Ground</td></tr>
+        <tr><td>GND Board C, GND Board D</td><td>STAR GND</td><td>Satu kabel per board. <b>Tidak ada</b> kabel GND tambahan antar board/modul.</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <section id="wajib">
+    <h2>Wajib malam ini (semuanya gratis)</h2>
+    <div class="finds">
+      <div class="f"><span class="num">1</span><div><h3>Setting jumper L298N</h3><p><b>Cabut</b> jumper ENA &amp; ENB (kalau tidak, speed selalu full dan PWM tidak ngaruh). Jumper <b>12V‑EN tetap terpasang</b>. Pin <b>5V</b> di terminal L298N <b>dibiarkan kosong</b> — jangan disambung ke rail 5V atau ke ESP32.</p></div></div>
+      <div class="f"><span class="num">2</span><div><h3>GND: satu kabel per modul, semua ke star</h3><p>Jangan tambah kabel GND dari ESP32 langsung ke L298N kalau keduanya sudah ke star — arus motor bisa numpang lewat ground ESP32 dan bikin reset/sensor ngaco.</p></div></div>
+      <div class="f"><span class="num">3</span><div><h3>Kabel power rapi &amp; terisolasi</h3><p>Karena tidak pakai sekring, short adalah risiko terbesar. Semua sambungan VBAT dan GND disolder atau di terminal screw, ditutup isolasi/heatshrink, tidak ada tembaga terbuka. Kabel baterai dan motor jauh dari lubang air dan diikat supaya tidak goyang.</p></div></div>
+      <div class="f"><span class="num">4</span><div><h3>Failsafe &amp; start aman di firmware</h3><p>Upload firmware final (bukan versi breadboard LED): motor dikunci mati di awal <code>setup()</code>, dan otomatis berhenti kalau 600 ms tidak ada pesan dari HP. Detail di bagian Firmware.</p></div></div>
+      <div class="f"><span class="num">5</span><div><h3>Nyalakan kapal di darat, pegang dulu</h3><p>Selama ~0.5 detik ESP32 boot, pin ENA/ENB belum dikontrol dan motor bisa kedut sebentar. Colok baterai dengan kapal dipegang/di darat, tunggu app terhubung, baru turunkan ke air.</p></div></div>
+      <div class="f"><span class="num">6</span><div><h3>Jaga tegangan baterai</h3><p>Ukur dengan multimeter tiap selesai sesi. Ukur <b>tiap sel</b> (conveyor hanya menguras sel 1, jadi sel 1 habis lebih dulu). Kalau total &lt;7.0 V atau salah satu sel &lt;3.5 V, charge keduanya — di bawah ini L7805 mulai drop dan sensor ngaco. Bawa sepasang sel cadangan yang sudah penuh ke lomba. Cabut baterai tiap tidak dipakai (conveyor jalan terus selama baterai tercolok).</p></div></div>
+    </div>
+  </section>
+
+  <section id="firmware">
+    <h2>Firmware</h2>
+    <p class="soft">Firmware final ada di folder <code>ARCA-Artifacts/firmware</code> (proyek PlatformIO, turunan langsung dari kode <code>Blue Sentinel - ARCA</code>). Protokol, port WebSocket 81, dan <code>webpage.h</code> tidak diubah — yang diganti hanya driver LED jadi L298N, HC‑SR04, dan buzzer asli. Tiga pengaman yang ada di dalamnya:</p>
+    <div class="finds">
+      <div class="f"><span class="num">A</span><div><h3>Motor terkunci mati saat boot</h3><p><code>setupMotors()</code> dipanggil paling awal di <code>setup()</code>: IN1–IN4 dan ENA/ENB langsung LOW sebelum WiFi dinyalakan.</p></div></div>
+      <div class="f"><span class="num">B</span><div><h3>Failsafe 600 ms</h3><p>UI di <code>webpage.h</code> mengirim pesan <code>joystick</code> tiap 100 ms walau stik netral. Kalau 600 ms tidak ada pesan (HP putus, layar mati, keluar jangkauan), motor dimatikan dan buzzer bunyi. Motor juga mati saat HP terakhir disconnect.</p></div></div>
+      <div class="f"><span class="num">C</span><div><h3>Ramp akselerasi + sensor bergiliran</h3><p>Motor naik bertahap (kurangi brownout saat gas mendadak), turun langsung. 4 HC‑SR04 dibaca satu per satu tiap 60 ms dengan filter median, lalu jadi <code>obsL</code>/<code>obsR</code> (sensor HALANGAN depan ≤ 40 cm, kiri &amp; kanan berdiri sendiri) dan <code>binFull</code> (sensor SAMPAH: kedua sensor bak ≤ 6 cm ≈ 5 cm). Logika ini sudah diuji 30 skenario di PC (<code>firmware/test</code>).</p></div></div>
+    </div>
+    <p class="soft" style="margin-top:10px;font-size:.88rem"><b>Penting untuk lomba:</b> buka app dari ESP32 langsung — sambungkan HP ke WiFi <code>ARCA-Boat</code> (password <code>arca12345</code>), lalu buka <code>http://192.168.4.1/</code>. App ARCA Control yang dibuka dari claude.ai hanya Mode Simulasi, karena browser memblokir koneksi <code>ws://</code> dari halaman https. Matikan data seluler HP supaya tidak pindah jaringan.</p>
+  </section>
+
+  <section id="uji">
+    <h2>Urutan uji sebelum lomba</h2>
+    <ul class="check">
+      <li>Tanpa ESP32 &amp; sensor terpasang: colok baterai, ukur VBAT (~8.2–8.4 V), 5V rail (4.9–5.1 V), titik tengah ke GND (3.0–4.2 V) sebelum conveyor disambung.</li>
+      <li>Cek jumper L298N: ENA/ENB dicabut, 12V‑EN terpasang, pin 5V kosong.</li>
+      <li>Pasang ESP32, baling‑baling di udara: cabut‑colok baterai 5× — motor tidak boleh jalan sendiri lebih dari kedutan sesaat.</li>
+      <li>Joystick maju: kedua motor dorong ke arah yang bikin kapal maju. Belok kiri: motor kanan lebih kencang. Kalau terbalik, tukar kabel motor di OUT.</li>
+      <li>Matikan WiFi HP saat joystick ditahan → motor berhenti dalam &lt;1 detik dan buzzer bunyi.</li>
+      <li>Gas penuh mendadak 10×: ESP32 tidak reset, app tetap terhubung.</li>
+      <li>Tangan di depan tiap sensor satu per satu → nilai yang berubah di app sesuai posisinya (Bin‑L/R, Depan‑L/R).</li>
+      <li>Uji apung di ember/bak 5 menit, cek tidak ada air masuk ke area elektronik.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Setelah lomba (opsional)</h2>
+    <ul class="later">
+      <li>Sekring 5 A + saklar di kabel baterai — pengaman short paling murah.</li>
+      <li>Elco 1000 µF di terminal 12V L298N dan 100 nF di tiap motor — kalau ternyata ESP32 sering reset atau sensor sering loncat.</li>
+      <li>Resistor 10k ENA/ENB ke GND — menghilangkan kedutan motor saat boot.</li>
+      <li>Divider tegangan baterai ke ADC supaya cutoff otomatis, dan driver TB6612FNG pengganti L298N untuk dorongan motor lebih kuat.</li>
+    </ul>
+  </section>
+
+  <footer>
+    Detail per‑board: <a href="https://claude.ai/artifact/MFAHK32cgztGqBZBmvmtF3">ARCA Wiring Map</a> · App kendali: <a href="https://claude.ai/artifact/K1HtBQqEibAvnRwaPDPUgb">ARCA Control</a>. Cocokkan nomor GPIO dengan silkscreen board fisik sebelum menyolder.
+  </footer>
+</div>
+
+</body>
+</html>

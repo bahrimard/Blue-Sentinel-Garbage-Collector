@@ -1,0 +1,188 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" width="1200" height="800" role="img" aria-label="Diagram wiring ARCA versi lomba: baterai 2S masuk ke VBAT bus di Board A. Dari bus ke L298N, ESP32 VIN, dan L7805. Motor conveyor diambil dari titik tengah pack (satu sel, 3 sampai 4,2 volt) ke ground, tanpa buck converter. L7805 memberi 5V ke board sensor dan buzzer. ESP32 mengendalikan L298N lewat GPIO 13,14,16,17 dan PWM 25,26, membaca empat HC-SR04 lewat TRIG 4,5,18,19 dan ECHO 34, 35, 32, 33, dan menyalakan buzzer lewat GPIO27. Semua ground kembali ke satu titik star di Board A." xmlns:c2pa="http://c2pa.org/manifest"><metadata><c2pa:manifest>AAAWgmp1bWIAAAAeanVtZGMycGEAEQAQgAAAqgA4m3EDYzJwYQAAABZcanVtYgAAAEdqdW1kYzJtYQARABCAAACqADibcQN1cm46YzJwYTpmNjE3YmFlMC0xZTk3LTRlY2QtYWRhNC1lNDBlYzRlMGJkNzkAAAADl2p1bWIAAAApanVtZGMyYXMAEQAQgAAAqgA4m3EDYzJwYS5hc3NlcnRpb25zAAAAALxqdW1iAAAARGp1bWRjYm9yABEAEIAAAKoAOJtxE2MycGEuaW5ncmVkaWVudC52MwAAAAAYYzJzaIJ70ThDGjs4oooGDg2v4jcAAABwY2JvcqNpZGM6Zm9ybWF0bWltYWdlL3N2Zyt4bWxqaW5zdGFuY2VJRHgseG1wOmlpZDo5OTg3YWZlZS0wMjBhLTRiODctYjQwMi1mYzhmMjMwNzBkN2ZscmVsYXRpb25zaGlwaHBhcmVudE9mAAAB4mp1bWIAAABBanVtZGNib3IAEQAQgAAAqgA4m3ETYzJwYS5hY3Rpb25zLnYyAAAAABhjMnNo5PUyp5/ulFeHwNno124ClwAAAZljYm9yomdhY3Rpb25zgqJmYWN0aW9ua2MycGEub3BlbmVkanBhcmFtZXRlcnOha2luZ3JlZGllbnRzgaJjdXJseC1zZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmluZ3JlZGllbnQudjNkaGFzaFggE1MTvUJLdEeaSauMiHEEF4AR9K+1/JxBq/Z2IU8VDbKkZmFjdGlvbngdY29tLmFudGhyb3BpYy5jbGF1ZGUucHJvdmlkZWRqcGFyYW1ldGVyc6F4H2NvbS5hbnRocm9waWMub3JpZ2luLWNvbmZpZGVuY2VndW5rbm93bmtkZXNjcmlwdGlvbnhmQ2xhdWRlIHByb3ZpZGVkIHRoaXMgZmlsZSBhdCB0aGUgcmVxdWVzdCBvZiBhIHVzZXIgYW5kIG1heSBoYXZlIGNyZWF0ZWQgb3IgbW9kaWZpZWQgdGhlIGZpbGUgY29udGVudHMubXNvZnR3YXJlQWdlbnShZG5hbWVmQ2xhdWRlcmFsbEFjdGlvbnNJbmNsdWRlZPUAAADIanVtYgAAAEBqdW1kY2JvcgARABCAAACqADibcRNjMnBhLmhhc2guZGF0YQAAAAAYYzJzaG7Wo6Wr87V/ut8p4zKGoegAAACAY2JvcqVjYWxnZnNoYTI1NmNwYWRMAAAAAAAAAAAAAAAAZGhhc2hYICwITvr9vOr99HcwI8fyty5dcR2nEJVDyGJ+yiijA7H2ZG5hbWVuanVtYmYgbWFuaWZlc3RqZXhjbHVzaW9uc4GiZXN0YXJ0GQKZZmxlbmd0aBkeBAAAAj5qdW1iAAAAJ2p1bWRjMmNsABEAEIAAAKoAOJtxA2MycGEuY2xhaW0udjIAAAACD2Nib3KlY2FsZ2ZzaGEyNTZpc2lnbmF0dXJleE1zZWxmI2p1bWJmPS9jMnBhL3VybjpjMnBhOmY2MTdiYWUwLTFlOTctNGVjZC1hZGE0LWU0MGVjNGUwYmQ3OS9jMnBhLnNpZ25hdHVyZWppbnN0YW5jZUlEeCx4bXA6aWlkOjhmNDhkOTYyLThhZWItNDRhZi05MzM0LWNhM2IxZTRjOTQ1ZnJjcmVhdGVkX2Fzc2VydGlvbnODomN1cmx4LXNlbGYjanVtYmY9YzJwYS5hc3NlcnRpb25zL2MycGEuaW5ncmVkaWVudC52M2RoYXNoWCATUxO9Qkt0R5pJq4yIcQQXgBH0r7X8nEGr9nYhTxUNsqJjdXJseCpzZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmFjdGlvbnMudjJkaGFzaFggYD9jbYbC2ewP2xeO01+hDL0ZGm/CgyTwZz1gO4Mq8wmiY3VybHgpc2VsZiNqdW1iZj1jMnBhLmFzc2VydGlvbnMvYzJwYS5oYXNoLmRhdGFkaGFzaFggMXUImKm5B5r9jqO8mo4UIH5TaJ+BurL/NAmEdW0hr5t0Y2xhaW1fZ2VuZXJhdG9yX2luZm+jZG5hbWVvQW50aHJvcGljIEZpbGVzZ3ZlcnNpb25lMS4wLjBrc3BlY1ZlcnNpb25lMi40LjAAABA4anVtYgAAAChqdW1kYzJjcwARABCAAACqADibcQNjMnBhLnNpZ25hdHVyZQAAABAIY2JvctKEWQISogEmGCFZAgowggIGMIIBjaADAgECAhRA5aAK7sI50L64g/oGQgU9Z1UTADAKBggqhkjOPQQDAzBJMRcwFQYDVQQKEw5BbnRocm9waWMsIFBCQzEuMCwGA1UEAxMlQW50aHJvcGljIENvbnRlbnQgQ3JlZGVudGlhbHMgUm9vdCBDQTAeFw0yNjA4MDcxODQzNTZaFw0yODA4MDYxOTQzNTZaMEQxFzAVBgNVBAoTDkFudGhyb3BpYywgUEJDMSkwJwYDVQQDEyBBbnRocm9waWMgQ2xhdWRlIENvbnRlbnQgU2lnbmluZzBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABJh6CmvLUBgFFNU0vUKlOVtE6djd17L5SuwX0LemFisBM3dkd/3cyjxFA3Qo5S46fX0/ihY0VZ7mfb9KF703t5OjWDBWMA4GA1UdDwEB/wQEAwIHgDAVBgNVHSUEDjAMBgorBgEEAYPoXgIBMAwGA1UdEwEB/wQCMAAwHwYDVR0jBBgwFoAUzlHiBIFOZFsj+OPEz5o+nMHXXMIwCgYIKoZIzj0EAwMDZwAwZAIwMXMdFJ4BetLLVY7ORuE9noqbbAZOZn/aArXyTwFAZfKrPzxF2vPoJNf1+UCdg1XGAjBwX1zd9WGqYkqmL5SFqw1QySjr1zJfpJM9+1rdDwSPLMOPOjKuiXjoU/pUUeG9RwmhY3BhZFkNngAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPZYQNnHu/YvvTMmJlhmeG/1dRIk2kcOIZkz0d3F8km7NChv1u1N0Dk6faAEtfcuiaxe8dd7WJc9GlxKROfKLbbp92I=</c2pa:manifest></metadata>
+        <rect width="1200" height="800" fill="#FFFFFF"/>
+        <style>.brd{fill:#EAF1EE;stroke:#526661;stroke-width:1.2;stroke-dasharray:6 4}
+.box{fill:#FFFFFF;stroke:#122421;stroke-width:1.4}
+.lbl{fill:#122421;font-family:'IBM Plex Mono',ui-monospace,Menlo,monospace;font-size:12px}
+.lbl-b{fill:#122421;font-family:'IBM Plex Sans',system-ui,sans-serif;font-size:14px;font-weight:700}
+.sm{fill:#526661;font-family:'IBM Plex Mono',ui-monospace,Menlo,monospace;font-size:10px}
+.pin{fill:#526661;font-family:'IBM Plex Mono',ui-monospace,Menlo,monospace;font-size:9.5px}
+.warn-t{fill:#A85A1E;font-family:'IBM Plex Mono',ui-monospace,Menlo,monospace;font-size:10.5px;font-weight:600}
+.brd-t{fill:#526661;font-family:'IBM Plex Mono',ui-monospace,Menlo,monospace;font-size:10px;letter-spacing:.06em}
+.w-p{stroke:#C6402F;stroke-width:3;fill:none}
+.w-5{stroke:#D9832A;stroke-width:2.5;fill:none}
+.w-c{stroke:#D9832A;stroke-width:2.5;fill:none;stroke-dasharray:7 4}
+.w-g{stroke:#26332F;stroke-width:2.5;fill:none}
+.w-s{stroke:#B58A12;stroke-width:1.8;fill:none}
+.w-e{stroke:#2E8A54;stroke-width:1.8;fill:none}
+.w-m{stroke:#3768AC;stroke-width:1.8;fill:none}
+.st{stroke:#122421;stroke-width:1.4;fill:none}
+.dot{fill:#122421}</style>
+        <defs>
+          <g id="gnd"><line x1="-8" y1="0" x2="8" y2="0" class="st"/><line x1="-5" y1="4" x2="5" y2="4" class="st"/><line x1="-2" y1="8" x2="2" y2="8" class="st"/></g>
+        </defs>
+
+        <!-- BATTERY -->
+        <text x="75" y="190" text-anchor="middle" class="lbl-b">BATERAI 2S</text>
+        <rect x="20" y="200" width="110" height="170" rx="6" class="box"/>
+        <rect x="36" y="212" width="58" height="54" rx="4" style="fill:#EAF1EE;stroke:#526661;stroke-width:1.2"/>
+        <text x="65" y="236" text-anchor="middle" class="lbl">SEL 2</text>
+        <text x="65" y="252" text-anchor="middle" class="sm">18650</text>
+        <rect x="36" y="296" width="58" height="54" rx="4" style="fill:#EAF1EE;stroke:#526661;stroke-width:1.2"/>
+        <text x="65" y="320" text-anchor="middle" class="lbl">SEL 1</text>
+        <text x="65" y="336" text-anchor="middle" class="sm">18650</text>
+        <line x1="65" y1="266" x2="65" y2="296" class="st"/>
+        <text x="100" y="226" class="pin">+</text>
+        <line x1="94" y1="222" x2="440" y2="222" class="w-p"/>
+        <text x="150" y="212" class="sm">konektor baterai = saklar ON/OFF</text>
+        <text x="150" y="240" class="sm">kabel tebal · 7.4 V nom · 8.4 V penuh</text>
+        <polyline points="65,350 65,392 412,392" class="w-g"/>
+        <text x="75" y="386" class="sm">−</text>
+
+        <!-- BOARD A -->
+        <rect x="400" y="150" width="230" height="480" rx="10" class="brd"/>
+        <text x="412" y="168" class="brd-t">BOARD A · PWR</text>
+        <line x1="440" y1="190" x2="440" y2="610" class="w-p"/>
+        <circle cx="440" cy="222" r="3.5" class="dot"/>
+        <text x="448" y="248" class="sm">VBAT bus</text>
+
+        <circle cx="440" cy="200" r="3.5" class="dot"/>
+        <line x1="440" y1="200" x2="700" y2="200" class="w-p"/>
+        <text x="452" y="193" class="sm">J3 → L298N 12V</text>
+
+        <circle cx="440" cy="400" r="3.5" class="dot"/>
+        <line x1="440" y1="400" x2="700" y2="400" class="w-p"/>
+        <text x="452" y="393" class="sm">J2 → ESP32 VIN</text>
+
+        <circle cx="440" cy="462" r="3.5" class="dot"/>
+        <line x1="440" y1="462" x2="470" y2="462" class="w-p"/>
+        <rect x="470" y="440" width="80" height="44" rx="4" class="box"/>
+        <text x="510" y="466" text-anchor="middle" class="lbl">L7805</text>
+        <line x1="510" y1="484" x2="510" y2="498" class="st"/>
+        <use href="#gnd" x="510" y="498"/>
+        <text x="510" y="526" text-anchor="middle" class="sm">1µF in · 1µF out</text>
+        <polyline points="550,462 600,462 600,700 660,700" class="w-5"/>
+        <text x="606" y="560" class="sm" style="fill:#D9832A">5V</text>
+
+        <!-- conveyor dari titik tengah pack (1 sel, 3.0-4.2 V), tanpa buck -->
+        <circle cx="65" cy="281" r="3.5" class="dot"/>
+        <polyline points="65,281 10,281 10,520 124,520" class="w-c"/>
+        <circle cx="150" cy="520" r="26" class="box"/>
+        <text x="150" y="525" text-anchor="middle" class="lbl-b">M</text>
+        <text x="150" y="566" text-anchor="middle" class="sm">conveyor</text>
+        <text x="150" y="580" text-anchor="middle" class="sm">selalu ON</text>
+        <polyline points="176,520 230,520 230,392" class="w-g"/>
+        <circle cx="230" cy="392" r="3.5" class="dot"/>
+        <text x="18" y="440" class="sm" style="fill:#D9832A">+ titik tengah</text>
+        <text x="18" y="453" class="sm" style="fill:#D9832A">(+ sel 1)</text>
+        <text x="18" y="466" class="sm" style="fill:#D9832A">3.0–4.2 V</text>
+        <text x="236" y="470" class="sm">− ke GND</text>
+
+        <line x1="412" y1="392" x2="412" y2="600" class="w-g"/>
+        <circle cx="412" cy="600" r="7" style="fill:#26332F"/>
+        <text x="396" y="590" text-anchor="end" class="lbl">STAR GND</text>
+        <text x="396" y="606" text-anchor="end" class="sm">semua GND ke sini,</text>
+        <text x="396" y="619" text-anchor="end" class="sm">1 kabel per modul</text>
+
+        <!-- L298N -->
+        <rect x="700" y="60" width="200" height="200" rx="6" class="box"/>
+        <text x="716" y="88" class="lbl-b">L298N</text>
+        <text x="716" y="110" class="warn-t">jumper ENA/ENB: CABUT</text>
+        <text x="716" y="128" class="sm">jumper 12V‑EN: pasang</text>
+        <text x="716" y="146" class="sm">pin 5V: kosongkan</text>
+        <text x="716" y="176" class="sm">GND → ★</text>
+        <text x="708" y="214" class="pin">12V</text>
+        <text x="892" y="104" text-anchor="end" class="pin">OUT1/2</text>
+        <text x="892" y="224" text-anchor="end" class="pin">OUT3/4</text>
+        <g class="pin">
+          <text x="720" y="252" text-anchor="middle">IN1</text><text x="745" y="252" text-anchor="middle">IN2</text>
+          <text x="770" y="252" text-anchor="middle">IN3</text><text x="795" y="252" text-anchor="middle">IN4</text>
+          <text x="840" y="252" text-anchor="middle">ENA</text><text x="865" y="252" text-anchor="middle">ENB</text>
+        </g>
+        <line x1="900" y1="94" x2="968" y2="94" class="st"/><line x1="900" y1="106" x2="968" y2="106" class="st"/>
+        <line x1="900" y1="214" x2="968" y2="214" class="st"/><line x1="900" y1="226" x2="968" y2="226" class="st"/>
+        <circle cx="1000" cy="100" r="32" class="box"/>
+        <text x="1000" y="105" text-anchor="middle" class="lbl-b">M</text>
+        <text x="1000" y="150" text-anchor="middle" class="sm">baling kiri</text>
+        <circle cx="1000" cy="220" r="32" class="box"/>
+        <text x="1000" y="225" text-anchor="middle" class="lbl-b">M</text>
+        <text x="1000" y="270" text-anchor="middle" class="sm">baling kanan</text>
+
+        <line x1="720" y1="260" x2="720" y2="330" class="w-s"/>
+        <line x1="745" y1="260" x2="745" y2="330" class="w-s"/>
+        <line x1="770" y1="260" x2="770" y2="330" class="w-s"/>
+        <line x1="795" y1="260" x2="795" y2="330" class="w-s"/>
+        <line x1="840" y1="260" x2="840" y2="330" class="w-m"/>
+        <line x1="865" y1="260" x2="865" y2="330" class="w-m"/>
+
+        <!-- ESP32 -->
+        <rect x="690" y="322" width="220" height="216" rx="10" class="brd"/>
+        <rect x="700" y="330" width="200" height="200" rx="6" class="box"/>
+        <g class="pin">
+          <text x="720" y="346" text-anchor="middle">13</text><text x="745" y="346" text-anchor="middle">14</text>
+          <text x="770" y="346" text-anchor="middle">16</text><text x="795" y="346" text-anchor="middle">17</text>
+          <text x="840" y="346" text-anchor="middle">25</text><text x="865" y="346" text-anchor="middle">26</text>
+        </g>
+        <text x="708" y="404" class="pin">VIN</text>
+        <text x="800" y="430" text-anchor="middle" class="lbl-b">ESP32 DevKit V1</text>
+        <text x="800" y="448" text-anchor="middle" class="brd-t">BOARD B · MCU</text>
+        <text x="800" y="466" text-anchor="middle" class="sm">GND → ★</text>
+        <text x="892" y="484" text-anchor="end" class="pin">27</text>
+        <g class="pin">
+          <text x="715" y="522" text-anchor="middle">4</text><text x="739" y="522" text-anchor="middle">5</text>
+          <text x="763" y="522" text-anchor="middle">18</text><text x="787" y="522" text-anchor="middle">19</text>
+          <text x="811" y="522" text-anchor="middle">34</text><text x="835" y="522" text-anchor="middle">35</text>
+          <text x="859" y="522" text-anchor="middle">32</text><text x="883" y="522" text-anchor="middle">33</text>
+        </g>
+        <line x1="715" y1="530" x2="715" y2="590" class="w-s"/>
+        <line x1="739" y1="530" x2="739" y2="590" class="w-s"/>
+        <line x1="763" y1="530" x2="763" y2="590" class="w-s"/>
+        <line x1="787" y1="530" x2="787" y2="590" class="w-s"/>
+        <line x1="811" y1="530" x2="811" y2="590" class="w-e"/>
+        <line x1="835" y1="530" x2="835" y2="590" class="w-e"/>
+        <line x1="859" y1="530" x2="859" y2="590" class="w-e"/>
+        <line x1="883" y1="530" x2="883" y2="590" class="w-e"/>
+        <polyline points="900,480 1010,480 1010,690 1025,690" class="w-s"/>
+
+        <!-- BOARD C -->
+        <rect x="660" y="590" width="300" height="190" rx="10" class="brd"/>
+        <text x="751" y="608" text-anchor="middle" class="pin">TRIG</text>
+        <text x="847" y="608" text-anchor="middle" class="pin">ECHO</text>
+        <rect x="675" y="622" width="60" height="42" rx="4" class="box"/>
+        <rect x="745" y="622" width="60" height="42" rx="4" class="box"/>
+        <rect x="815" y="622" width="60" height="42" rx="4" class="box"/>
+        <rect x="885" y="622" width="60" height="42" rx="4" class="box"/>
+        <g text-anchor="middle">
+          <text x="705" y="640" class="lbl">TB1</text><text x="705" y="655" class="sm">Bin‑L</text>
+          <text x="775" y="640" class="lbl">TB2</text><text x="775" y="655" class="sm">Bin‑R</text>
+          <text x="845" y="640" class="lbl">TB3</text><text x="845" y="655" class="sm">Depan‑L</text>
+          <text x="915" y="640" class="lbl">TB4</text><text x="915" y="655" class="sm">Depan‑R</text>
+        </g>
+        <text x="810" y="688" text-anchor="middle" class="sm">4× HC‑SR04 · ECHO ÷ 470Ω/1kΩ → 3.40 V</text>
+        <text x="810" y="704" text-anchor="middle" class="sm">VCC ke 5V rail · GND ke rail GND</text>
+        <line x1="660" y1="700" x2="672" y2="700" class="w-5"/>
+        <polyline points="672,700 672,745 1160,745" class="w-5"/>
+        <text x="680" y="740" class="sm" style="fill:#D9832A">5V rail</text>
+        <text x="670" y="770" class="brd-t">BOARD C · SENSOR</text>
+        <text x="950" y="770" text-anchor="end" class="sm">GND → ★</text>
+
+        <!-- BOARD D -->
+        <rect x="990" y="590" width="190" height="190" rx="10" class="brd"/>
+        <text x="1000" y="770" class="brd-t">BOARD D · BUZZER</text>
+        <polyline points="1010,590 1010,690 1025,690" class="w-s"/>
+        <rect x="1025" y="684" width="30" height="12" rx="2" class="box"/>
+        <text x="1040" y="678" text-anchor="middle" class="sm">1k</text>
+        <line x1="1055" y1="690" x2="1072" y2="690" class="st"/>
+        <circle cx="1090" cy="690" r="18" class="box"/>
+        <text x="1090" y="694" text-anchor="middle" class="pin">Q1</text>
+        <text x="1114" y="694" class="pin">BC337</text>
+        <line x1="1090" y1="708" x2="1090" y2="718" class="st"/>
+        <use href="#gnd" x="1090" y="718"/>
+        <text x="1100" y="724" class="pin">E</text>
+        <line x1="1090" y1="672" x2="1090" y2="658" class="st"/>
+        <text x="1096" y="668" class="pin">C</text>
+        <circle cx="1090" cy="645" r="13" class="box"/>
+        <text x="1090" y="649" text-anchor="middle" class="pin">BZ</text>
+        <polyline points="1090,632 1090,618 1160,618 1160,745" class="w-5"/>
+        <text x="1098" y="612" class="pin">+</text>
+        <text x="1016" y="610" class="pin">GPIO27</text>
+      </svg>
