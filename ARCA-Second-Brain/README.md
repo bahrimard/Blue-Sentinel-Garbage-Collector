@@ -52,6 +52,7 @@ Kronologi lengkap: [session-history](0_Capture/session-history.md) · Semua kepu
 ## 6. Yang harus dilakukan
 
 **Malam ini / sebelum lomba** → [1_Projects/lomba-2026-09-24](1_Projects/lomba-2026-09-24/README.md) (rakit, flash firmware final, urutan uji).
+**Lomba November 2026 (ARCA v2)** → [1_Projects/lomba-november-2026](1_Projects/lomba-november-2026/README.md) (analisis kebutuhan, desain power, kontrak MQTT).
 **Setelah lomba** → [1_Projects/upgrade-pasca-lomba](1_Projects/upgrade-pasca-lomba/README.md) (sekring, kapasitor, pull‑down, cutoff baterai, driver motor lebih efisien).
 **Pertanyaan terbuka** → [0_Capture/inbox-open-questions.md](0_Capture/inbox-open-questions.md).
 

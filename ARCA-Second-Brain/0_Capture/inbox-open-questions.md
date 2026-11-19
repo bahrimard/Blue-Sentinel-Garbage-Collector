@@ -11,3 +11,10 @@
 - [ ] **Jarak baris ESP32 DevKit** (25.4 vs 22.86 mm) — wajib dicek dengan print 1:1 sebelum PCB dicetak.
 - [ ] Varian board: cocokkan penomoran GPIO dengan silkscreen DevKit yang dipakai.
 - [ ] Pitch terminal block sensor (5.08 vs 2.54 mm).
+- [ ] **Tanggal lomba November 2026** & kriteria penilaian juri (teknis / dampak / demo)?
+- [ ] **Rating tegangan & arus conveyor** (12 V atau 3.5 V?) — menentukan MOSFET langsung vs buck 3.5 V.
+- [ ] **Anggaran:** ESP32‑S3‑CAM, GPS, BTS7960, antena eksternal, sel 18650 high‑drain asli ×9.
+- [ ] **Edge Hub:** laptop siapa, spesifikasi, ada GPU?
+- [ ] **Area uji** (kolam/danau/sungai arus) & ada internet atau tidak di lokasi?
+- [ ] **Audit GPIO v2** (≈22/25 pin terpakai) — apakah perlu I/O expander?
+- [ ] Jenis **BMS 3S** yang tersedia (satu port vs port charge terpisah).
